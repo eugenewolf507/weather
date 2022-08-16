@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+// TODO move key to env files from Form and WeatherTable
+import { useState } from 'react';
+import Form from './components/Form';
+import CityArr from './components/CityArr';
+import WeatherTable from './components/WeatherTable';
 
 function App() {
+  const [citySearchArr, setCitySearchArr] = useState([]);
+  const [cityAddedArr, setCityAddedArr] = useState([]);
+
   return (
-    <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 className="text-3xl font-bold text-center">
+        Hello weather compare app!
+      </h1>
+      <Form setCitySearchArr={setCitySearchArr} />
+      {citySearchArr.length !== 0 && (
+        <CityArr
+          citySearchArr={citySearchArr}
+          cityAddedArr={cityAddedArr}
+          setCityAddedArr={setCityAddedArr}
+        />
+      )}
+      <WeatherTable cityAddedArr={cityAddedArr} />
     </div>
   );
 }
